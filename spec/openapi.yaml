@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: Toy Microservice
+  version: 0.2.0
+  description: >
+    A simple toy service that demonstrates echo functionality, version/environment metadata,
+    and health checks. It supports semantic versioning and provides endpoints to retrieve 
+    runtime info and echo input messages with slight modifications.
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /echo:
+    post:
+      summary: Echo and modify an input message
+      description: |
+        Takes a JSON payload containing a `message` and returns a modified message 
+        along with metadata such as version, commit hash, and environment.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EchoRequest'
+      responses:
+        '200':
+          description: Successful echo response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EchoResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /info:
+    get:
+      summary: Retrieve service information
+      description: |
+        Returns details about the service including its name, current semantic version, 
+        environment, log verbosity, fake secret value (redacted), and current commit hash.
+      responses:
+        '200':
+          description: Service information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoResponse'
+
+  /healthz:
+    get:
+      summary: Health check endpoint
+      description: |
+        Returns a simple status object for readiness/liveness checks.
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+components:
+  schemas:
+    EchoRequest:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Hello world"
+      required:
+        - message
+
+    EchoResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The modified echo message
+          example: "Hello world [modified]"
+        version:
+          type: string
+          description: Current semantic version of the service
+          example: "v0.2.0"
+        commit:
+          type: string
+          description: Git commit hash or short SHA
+          example: "abc1234"
+        env:
+          type: string
+          description: Current runtime environment
+          example: "dev"
+      required:
+        - message
+        - version
+        - commit
+        - env
+
+    InfoResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the service
+          example: "toy-service"
+        version:
+          type: string
+          description: Current semantic version of the service
+          example: "v0.2.0"
+        env:
+          type: string
+          description: Current runtime environment
+          example: "dev"
+        logVerbosity:
+          type: string
+          description: Current log verbosity level
+          example: "info"
+        fakeSecret:
+          type: string
+          description: A placeholder or redacted secret for demonstration
+          example: "redacted"
+        commit:
+          type: string
+          description: Git commit hash
+          example: "abc1234"
+      required:
+        - name
+        - version
+        - env
+        - logVerbosity
+        - fakeSecret
+        - commit
+
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Health status of the service
+          example: "ok"
+      required:
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message explaining what went wrong
+          example: "Invalid input"
+      required:
+        - error
