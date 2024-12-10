@@ -2,10 +2,6 @@
 //
 // The main entrypoint for the toy microservice server.
 // This file sets up the HTTP server, routes, and logging.
-//
-// Initially, it only provides a /healthz endpoint for basic health checks.
-// Future steps will add echo, info endpoints, environment variable handling,
-// semantic versioning integration, and more.
 
 package main
 
@@ -25,8 +21,6 @@ import (
 )
 
 func main() {
-	// Set up structured logging with zerolog
-	// Adjust time format for readability
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 	log.Info().Msg("Starting toy-service server")
 
@@ -34,7 +28,14 @@ func main() {
 
 	// Register routes
 	r.Get("/healthz", handlers.HealthzHandler)
+	r.Post("/echo", handlers.EchoHandler)
+	r.Get("/info", handlers.InfoHandler)
 
+	srv := startServer(r)
+	gracefulShutdown(srv)
+}
+
+func startServer(r *chi.Mux) *http.Server {
 	srv := &http.Server{
 		Addr:    ":8080",
 		Handler: r,
@@ -47,7 +48,10 @@ func main() {
 		}
 	}()
 
-	// Graceful shutdown handling
+	return srv
+}
+
+func gracefulShutdown(srv *http.Server) {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 	<-quit
