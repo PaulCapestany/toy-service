@@ -72,7 +72,7 @@ You can influence runtime behavior and metadata via environment variables:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., redacted, topsecret)
-- `VERSION` (e.g., v0.2.0)
+- `VERSION` (e.g., v0.2.1)
 - `GIT_COMMIT` (e.g., abc1234)
 
 For example:
@@ -81,7 +81,7 @@ For example:
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.2.0
+export VERSION=v0.2.1
 export GIT_COMMIT=abc1234
 
 make run
@@ -94,13 +94,21 @@ curl http://localhost:8080/healthz
 # {"status":"ok"}
 
 curl -X POST -H "Content-Type: application/json" -d '{"message":"Hello"}' http://localhost:8080/echo
-# {"message":"Hello [modified]","version":"v0.2.0","commit":"unknown","env":"dev"}
+# {"message":"Hello [modified]","version":"v0.2.1","commit":"unknown","env":"dev"}
 
 curl http://localhost:8080/info
-# {"name":"toy-service","version":"v0.2.0","env":"dev","logVerbosity":"info","fakeSecret":"redacted","commit":"unknown"}
+# {"name":"toy-service","version":"v0.2.1","env":"dev","logVerbosity":"info","fakeSecret":"redacted","commit":"unknown"}
 ```
 
-(Adjust your environment variables to see different responses.)
+## Testing
+
+We validate all responses against the OpenAPI specification and run unit/integration tests with:
+
+```shell
+make test
+```
+
+If a change breaks the API contract (for example, by returning fields not defined in the spec or missing required properties), these tests will fail. Contributors should ensure that any API change is reflected in the OpenAPI spec and that all tests pass before opening a PR.
 
 ## Development Workflow
 
