@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Toy Microservice
-  version: 0.2.0
+  version: 0.2.1
   description: >
     A simple toy service that demonstrates echo functionality, version/environment metadata,
     and health checks. It supports semantic versioning and provides endpoints to retrieve 
@@ -14,9 +14,9 @@ servers:
 paths:
   /echo:
     post:
-      summary: Echo and modify an input message
+      summary: Echo and modify a non-zero-length input message
       description: |
-        Takes a JSON payload containing a `message` and returns a modified message 
+        Takes a JSON payload containing a `message` string of non-zero-length and returns a modified message 
         along with metadata such as version, commit hash, and environment.
       requestBody:
         required: true
@@ -32,7 +32,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EchoResponse'
         '400':
-          description: Bad request
+          description: Bad request (e.g. when `message` is empty or missing)
           content:
             application/json:
               schema:
@@ -72,6 +72,7 @@ components:
       properties:
         message:
           type: string
+          minLength: 1
           example: "Hello world"
       required:
         - message
@@ -86,7 +87,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.2.0"
+          example: "v0.2.1"
         commit:
           type: string
           description: Git commit hash or short SHA
@@ -111,7 +112,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.2.0"
+          example: "v0.2.1"
         env:
           type: string
           description: Current runtime environment

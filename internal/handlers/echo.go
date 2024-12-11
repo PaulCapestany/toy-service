@@ -36,6 +36,11 @@ func EchoHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if req.Message == "" {
+		http.Error(w, `{"error":"Invalid input"}`, http.StatusBadRequest)
+		return
+	}
+
 	cfg := LoadEnvConfig()
 
 	resp := EchoResponse{
