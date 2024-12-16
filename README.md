@@ -199,5 +199,5 @@ git checkout -b feature/my-new-endpoint
 
 ## License
 
-This project is free and open source!
+This project is free and open source :)
 
