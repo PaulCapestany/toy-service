@@ -13,8 +13,8 @@ Welcome to `toy-service`, a minimal microservice in Go designed to demonstrate b
 - **Automated CI/CD with Tekton or GitHub Actions (planned):**
   Future steps will introduce continuous integration and delivery pipelines, ensuring every commit and pull request is tested, built, and (optionally) deployed automatically.
 
-- **GitOps Deployment with Argo CD (planned):**
-  By using Git as the single source of truth for environment configurations and deployments, we’ll enable near-instant feedback loops for contributors and ensure reliable, versioned rollouts.
+- **GitOps Deployment with Argo CD:**
+  By using Git as the single source of truth for environment configurations and deployments via our `[gitops](https://github.com/paulcapestany/gitops)` repo, we’ll enable near-instant feedback loops for contributors and ensure reliable, versioned rollouts.
 
 - **Environment Configuration & Mocking Strategies:**
   Contributors can easily adjust environment variables to test different configurations locally or in dev environments, without needing complex local setups.
