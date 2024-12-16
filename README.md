@@ -1,6 +1,6 @@
 # Toy Service
 
-Welcome to `toy-service`, a minimal microservice in Go designed to demonstrate best practices in open-source software development, including OpenAPI-driven design, Semantic Versioning, GitOps deployments, and more. As we evolve this service, we’ll illustrate how to incrementally adopt industry-standard tools and workflows to ensure a clear API contract, smooth contributor experience, and reliable CI/CD.
+Welcome to `toy-service`, a minimal microservice in Go designed to demonstrate best practices in open-source software development, including OpenAPI-driven design, Semantic Versioning, `[GitOps](https://github.com/paulcapestany/gitops)` deployments, and more. As we evolve this service, we’ll illustrate how to incrementally adopt industry-standard tools and workflows to ensure a clear API contract, smooth contributor experience, and reliable CI/CD.
 
 ## Key Features and Goals
 
