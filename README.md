@@ -145,7 +145,7 @@ Example:
 Check out [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for more details.
 
 #### Tagging Releases:
-Once changes are merged to `main` and you’re ready to release, create a Git tag like `v0.2.0`. This tag represents a snapshot of the code at release time. CI/CD (once integrated) can build and push corresponding Docker images and update GitOps manifests.
+Once changes are merged to `main` and you’re ready to release, create a Git tag like `v0.2.0`. This tag represents a snapshot of the code at release time. CI/CD will build and push corresponding Docker images and update GitOps manifests.
 
 For early development, you might manually assign versions. Later, you can automate versioning using tools like semantic-release.
 
