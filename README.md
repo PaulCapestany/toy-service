@@ -10,7 +10,7 @@ Welcome to `toy-service`, a minimal microservice in Go designed to demonstrate b
 - **Semantic Versioning (SemVer) Integration:**
   Using [Semantic Versioning](https://semver.org/) makes it clear when changes are backward-compatible, introduce new features, or are breaking. This is crucial for multi-service ecosystems where external consumers depend on stable API contracts.
 
-- **Automated CI/CD with Tekton or GitHub Actions (planned):**
+- **Automated CI/CD with Tekton:**
   Future steps will introduce continuous integration and delivery pipelines, ensuring every commit and pull request is tested, built, and (optionally) deployed automatically.
 
 - **GitOps Deployment with Argo CD:**
