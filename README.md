@@ -49,7 +49,7 @@ toy-service/
     └── openapi.yaml         // OpenAPI definition of the service's API
 ```
 
-## Development
+## Usage
 
 **Prerequisites:**
 - Go 1.20+

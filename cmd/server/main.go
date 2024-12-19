@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
@@ -22,9 +23,21 @@ import (
 
 func main() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
-	log.Info().Msg("Starting toy-service server!!!")
+	log.Info().Msg("Starting toy-service server")
 
 	r := chi.NewRouter()
+
+	// Apply CORS middleware to allow local dev connections from toy-web
+	// Verbose logging is performed on handler initialization and request
+	// Just allow any origin during local dev. This can be narrowed down as needed.
+	r.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "OPTIONS"},
+		AllowedHeaders:   []string{"*"},
+		ExposedHeaders:   []string{"X-Request-Id"},
+		AllowCredentials: false,
+		MaxAge:           300, // 5 minutes
+	}))
 
 	// Register routes
 	r.Get("/healthz", handlers.HealthzHandler)
