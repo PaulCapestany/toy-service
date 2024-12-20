@@ -17,6 +17,9 @@ This document outlines planned enhancements and maintenance tasks for `toy-servi
 
 ### MINOR Enhancements (Non-Breaking Feature Additions)
 
+- **feat: add make clean**  
+  Need to get rid of `./bin/`
+
 - **feat: add /version endpoint for quick semantic version check**  
   Implement a `GET /version` endpoint returning the current version, enabling quick checks by tools or users.
 
