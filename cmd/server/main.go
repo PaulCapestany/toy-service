@@ -23,7 +23,7 @@ import (
 
 func main() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
-	log.Info().Msg("Starting toy-service server (testing pipeline build timing....)")
+	log.Info().Msg("Starting toy-service server (last build took 3min)")
 
 	r := chi.NewRouter()
 
