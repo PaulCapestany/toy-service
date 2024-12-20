@@ -23,7 +23,7 @@ import (
 
 func main() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
-	log.Info().Msg("Starting toy-service server with CORS support")
+	log.Info().Msg("Starting toy-service server")
 
 	r := chi.NewRouter()
 
