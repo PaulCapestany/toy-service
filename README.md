@@ -59,6 +59,9 @@ toy-service/
 ```bash
 make build
 make run
+
+# Clear build artifacts if you need a fresh build
+make clean
 ```
 
 By default, the service runs at http://localhost:8080.
