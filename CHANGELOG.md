@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0 - 2025-09-17
+
+### feat: Add make clean target for removing build artifacts
+
+Introduce a `make clean` goal that deletes the `./bin` directory, making it easier to reset the workspace between builds.
+
 ## v0.2.22 - 2024-12-19
 
 ### fix: Add CORS support so that `toy-web` can communicate with `toy-service` in local development
