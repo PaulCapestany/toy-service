@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.5 - 2025-09-18
+
+### docs: add quick curl probes
+
+Documented handy `curl` commands for `/healthz`, `/info`, and `/version` to speed up smoke tests, and refreshed version metadata to `v0.3.5` across docs and defaults.
+
 ## v0.3.4 - 2025-09-18
 
 ### chore: document targets with make help
