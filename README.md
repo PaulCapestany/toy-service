@@ -59,6 +59,9 @@ toy-service/
 ```bash
 make build
 make run
+
+# Clear build artifacts if you need a fresh build
+make clean
 ```
 
 By default, the service runs at http://localhost:8080.
@@ -68,6 +71,7 @@ By default, the service runs at http://localhost:8080.
 - **GET /healthz:** Check if the service is running.
 - **POST /echo:** Accepts a JSON `{"message":"..."}`, returns modified message plus version info.
 - **GET /info:** Returns environment, version, commit hash, and more.
+- **GET /version:** Lightweight health/version probe that returns only the service name, version, and commit hash.
 
 ### Environment Variables
 
@@ -75,7 +79,7 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.2.1)
+- `VERSION` (e.g., v0.3.1)
 - `GIT_COMMIT` (e.g., abc1234)
 
 **Example:**
@@ -83,7 +87,7 @@ Control runtime behavior via:
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.2.1
+export VERSION=v0.3.1
 export GIT_COMMIT=abc1234
 
 make run

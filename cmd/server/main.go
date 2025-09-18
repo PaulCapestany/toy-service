@@ -43,6 +43,7 @@ func main() {
 	r.Get("/healthz", handlers.HealthzHandler)
 	r.Post("/echo", handlers.EchoHandler)
 	r.Get("/info", handlers.InfoHandler)
+	r.Get("/version", handlers.VersionHandler)
 
 	srv := startServer(r)
 	gracefulShutdown(srv)

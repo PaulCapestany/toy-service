@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Toy Microservice
-  version: 0.2.1
+  version: 0.3.1
   description: >
     A simple toy service that demonstrates echo functionality, version/environment metadata,
     and health checks. It supports semantic versioning and provides endpoints to retrieve 
@@ -52,6 +52,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/InfoResponse'
 
+  /version:
+    get:
+      summary: Retrieve lightweight build/version metadata
+      description: |
+        Provides the service name, semantic version, and git commit hash. Useful for smoke tests
+        or CI/CD automation that need a quick version check without the additional metadata from `/info`.
+      responses:
+        '200':
+          description: Version information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResponse'
+
   /healthz:
     get:
       summary: Health check endpoint
@@ -87,7 +101,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.2.1"
+          example: "v0.3.1"
         commit:
           type: string
           description: Git commit hash or short SHA
@@ -112,7 +126,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.2.1"
+          example: "v0.3.1"
         env:
           type: string
           description: Current runtime environment
@@ -135,6 +149,26 @@ components:
         - env
         - logVerbosity
         - fakeSecret
+        - commit
+
+    VersionResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Service name identifier
+          example: "toy-service"
+        version:
+          type: string
+          description: Semantic version string for the running build
+          example: "v0.3.1"
+        commit:
+          type: string
+          description: Git commit hash or short SHA for the running build
+          example: "abc1234"
+      required:
+        - name
+        - version
         - commit
 
     HealthResponse:
