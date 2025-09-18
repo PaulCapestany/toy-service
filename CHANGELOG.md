@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.2 - 2025-09-18
+
+### chore: ignore local build artifacts
+
+Added a `.gitignore` to drop compiled binaries, macOS metadata, and log files from version control so the repo stays clean for contributors.
+
 ## v0.3.1 - 2025-09-18
 
 ### feat: Add `/version` endpoint for lightweight build checks
