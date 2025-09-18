@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.9 - 2025-09-18
+
+### docs: note jq dependency for curl helpers
+
+Clarified that the README's curl samples rely on `jq` for formatting and bumped version references to `v0.3.9`.
+
 ## v0.3.8 - 2025-09-18
 
 ### docs: document configurable port
