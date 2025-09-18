@@ -97,6 +97,9 @@ curl -s http://localhost:8080/info | jq
 
 # Lightweight version check
 curl -s http://localhost:8080/version | jq
+
+# When the service runs inside Docker, use host.docker.internal instead of localhost
+curl -s http://host.docker.internal:8080/healthz | jq
 ```
 
 > These examples use `jq` for pretty-printing; install it or drop the pipe if unavailable.
