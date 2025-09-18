@@ -65,6 +65,9 @@ make run
 # Clear build artifacts if you need a fresh build
 make clean
 
+# Run the test suite
+make test
+
 # Override the listen port (defaults to 8080)
 PORT=9090 make run
 
