@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.8 - 2025-09-18
+
+### docs: document configurable port
+
+Added usage examples showing how to override the listen `PORT` in `make run`, plus updated defaults to `v0.3.8` across docs and specs.
+
 ## v0.3.7 - 2025-09-18
 
 ### docs: add CI smoke test guidance
