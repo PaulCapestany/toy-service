@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.10 - 2025-09-18
+
+### docs: add docker usage examples
+
+Documented how to build and run the service via Docker, including port overrides, and updated version references to `v0.3.10`.
+
 ## v0.3.9 - 2025-09-18
 
 ### docs: note jq dependency for curl helpers

@@ -95,13 +95,25 @@ curl -s http://localhost:8080/version | jq
 
 > These examples use `jq` for pretty-printing; install it or drop the pipe if unavailable.
 
+### Docker Usage
+
+Build and run the containerized service with:
+
+```bash
+docker build -t toy-service:latest .
+docker run -p 8080:8080 --rm toy-service:latest
+
+# Override the listen port exposed from the container
+PORT=9090 docker run -e PORT=9090 -p 9090:9090 --rm toy-service:latest
+```
+
 ### Environment Variables
 
 Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.3.9)
+- `VERSION` (e.g., v0.3.10)
 - `GIT_COMMIT` (e.g., abc1234)
 
 **Example:**
@@ -109,7 +121,7 @@ Control runtime behavior via:
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.9
+export VERSION=v0.3.10
 export GIT_COMMIT=abc1234
 
 PORT=9090 make run
