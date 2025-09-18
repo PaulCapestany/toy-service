@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.4 - 2025-09-18
+
+### chore: document targets with make help
+
+Added a `make help` target that prints descriptions for the most common commands, and refreshed docs/config to reference version `v0.3.4`.
+
 ## v0.3.3 - 2025-09-18
 
 ### chore: add gofmt automation
