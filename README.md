@@ -149,6 +149,9 @@ go test ./... -cover
 
 # Run a targeted test for quicker feedback
 go test ./cmd/server -run TestResolveAddr -v
+
+# Lint the makefile itself (GNU make 4.4+)
+make -n help
 ```
 
 Tests verify that handlers respond correctly, match the OpenAPI spec, and respect the contract defined in `spec/openapi.yaml`.
