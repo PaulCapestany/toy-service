@@ -111,6 +111,10 @@ docker run -p 8080:8080 --rm toy-service:latest
 
 # Override the listen port exposed from the container
 PORT=9090 docker run -e PORT=9090 -p 9090:9090 --rm toy-service:latest
+
+# Or use the Makefile helpers
+make docker-build
+make docker-run
 ```
 
 ### Environment Variables
