@@ -67,6 +67,9 @@ make clean
 
 # Override the listen port (defaults to 8080)
 PORT=9090 make run
+
+# Need a refresher on available commands?
+make help
 ```
 
 By default, the service runs at http://localhost:8080.
