@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.7 - 2025-09-18
+
+### docs: add CI smoke test guidance
+
+Documented the `make deps`, `make fmt`, `make test` sequence for local pipeline checks and bumped version metadata to `v0.3.7`.
+
 ## v0.3.6 - 2025-09-18
 
 ### docs: add troubleshooting tips

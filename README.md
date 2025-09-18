@@ -96,7 +96,7 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.3.6)
+- `VERSION` (e.g., v0.3.7)
 - `GIT_COMMIT` (e.g., abc1234)
 
 **Example:**
@@ -104,7 +104,7 @@ Control runtime behavior via:
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.6
+export VERSION=v0.3.7
 export GIT_COMMIT=abc1234
 
 make run
@@ -130,6 +130,18 @@ Tests verify that handlers respond correctly, match the OpenAPI spec, and respec
 - **Open a Pull Request:** CI runs tests automatically. Once approved, changes are merged.
 - **Versioning & Releases:** Use semantic versioning and, optionally, conventional commit messages to guide release processes.
 - **GitOps Integration:** Changes in `main` can be automatically deployed to dev/test environments via a separate GitOps repository (e.g., using Argo CD in the future).
+
+### CI/CD Smoke Test
+
+When validating pipelines manually, mimic the GitHub Actions jobs locally:
+
+```bash
+make deps
+make fmt
+make test
+```
+
+These commands align with the default CI workflow and help catch issues before pushing.
 
 ## Related Projects
 
