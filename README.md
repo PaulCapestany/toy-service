@@ -58,6 +58,7 @@ toy-service/
 **Steps:**
 ```bash
 make build
+make fmt
 make run
 
 # Clear build artifacts if you need a fresh build
@@ -79,7 +80,7 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.3.2)
+- `VERSION` (e.g., v0.3.3)
 - `GIT_COMMIT` (e.g., abc1234)
 
 **Example:**
@@ -87,7 +88,7 @@ Control runtime behavior via:
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.2
+export VERSION=v0.3.3
 export GIT_COMMIT=abc1234
 
 make run

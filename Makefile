@@ -1,4 +1,4 @@
-.PHONY: deps build test run clean docker-build docker-run
+.PHONY: deps build fmt test run clean docker-build docker-run
 
 deps:
 	@echo "Downloading Go module dependencies..."
@@ -7,6 +7,10 @@ deps:
 build: deps
 	@echo "Building toy-service..."
 	GO111MODULE=on go build -o bin/toy-service ./cmd/server
+
+fmt:
+	@echo "Formatting Go source files..."
+	gofmt -w $(shell find . -name '*.go' -not -path './vendor/*')
 
 clean:
 	@echo "Removing build artifacts..."

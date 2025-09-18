@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.3 - 2025-09-18
+
+### chore: add gofmt automation
+
+Introduced a `make fmt` target so contributors can format Go sources consistently. Documentation, defaults, and the OpenAPI spec now reflect version `v0.3.3`.
+
 ## v0.3.2 - 2025-09-18
 
 ### chore: ignore local build artifacts
