@@ -20,9 +20,6 @@ This document outlines planned enhancements and maintenance tasks for `toy-servi
 - **feat: add make clean**  
   Need to get rid of `./bin/`
 
-- **feat: add /version endpoint for quick semantic version check**  
-  Implement a `GET /version` endpoint returning the current version, enabling quick checks by tools or users.
-
 - **feat: provide a /metrics endpoint (Prometheus format)**  
   Introduce basic Prometheus-compatible metrics (e.g., request counts, latencies) to improve observability and performance monitoring.
 

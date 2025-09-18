@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0 - 2025-09-18
+
+### feat: Add `/version` endpoint for lightweight build checks
+
+Introduced a dedicated `GET /version` endpoint that returns the service name, semantic version, and git commit hash. The OpenAPI specification, router, and tests were extended so automation can verify deployments without parsing the broader `/info` payload. Defaults now point to `v0.3.0`.
+
 ## v0.2.22 - 2024-12-19
 
 ### fix: Add CORS support so that `toy-web` can communicate with `toy-service` in local development

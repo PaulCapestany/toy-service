@@ -40,6 +40,7 @@ func newTestServer() *httptest.Server {
 	r.Get("/healthz", HealthzHandler)
 	r.Post("/echo", EchoHandler)
 	r.Get("/info", InfoHandler)
+	r.Get("/version", VersionHandler)
 
 	return httptest.NewServer(r)
 }
@@ -54,6 +55,7 @@ func TestOpenAPIConformance(t *testing.T) {
 	healthzPath := "/healthz"
 	echoPath := "/echo"
 	infoPath := "/info"
+	versionPath := "/version"
 
 	// 1. Test /healthz
 	t.Run("GET /healthz", func(t *testing.T) {
@@ -81,7 +83,20 @@ func TestOpenAPIConformance(t *testing.T) {
 		validateResponse(t, swagger, "get", infoPath, resp.StatusCode, body)
 	})
 
-	// 3. Test /echo with valid input
+	// 3. Test /version
+	t.Run("GET /version", func(t *testing.T) {
+		resp, err := http.Get(server.URL + versionPath)
+		require.NoError(t, err)
+		defer resp.Body.Close()
+
+		body, err := ioutil.ReadAll(resp.Body)
+		require.NoError(t, err)
+		require.Equal(t, http.StatusOK, resp.StatusCode)
+
+		validateResponse(t, swagger, "get", versionPath, resp.StatusCode, body)
+	})
+
+	// 4. Test /echo with valid input
 	t.Run("POST /echo with valid input", func(t *testing.T) {
 		reqBody := `{"message":"Hello"}`
 		resp, err := http.Post(server.URL+echoPath, "application/json", bytes.NewBuffer([]byte(reqBody)))
@@ -95,7 +110,7 @@ func TestOpenAPIConformance(t *testing.T) {
 		validateResponse(t, swagger, "post", echoPath, resp.StatusCode, body)
 	})
 
-	// 4. Test /echo with invalid input (missing required "message" field)
+	// 5. Test /echo with invalid input (missing required "message" field)
 	t.Run("POST /echo with invalid input", func(t *testing.T) {
 		reqBody := `{"msg":"NoMessageField"}`
 		resp, err := http.Post(server.URL+echoPath, "application/json", bytes.NewBuffer([]byte(reqBody)))
