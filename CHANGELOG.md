@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.11 - 2025-09-18
+
+### feat: allow configuring listen port via PORT env
+
+The server now honors the `PORT` environment variable (e.g., `PORT=9090 make run`). Tests and documentation were updated accordingly, and the version metadata now references `v0.3.11`.
+
 ## v0.3.10 - 2025-09-18
 
 ### docs: add docker usage examples

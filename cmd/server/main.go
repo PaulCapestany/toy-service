@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -50,8 +51,10 @@ func main() {
 }
 
 func startServer(r *chi.Mux) *http.Server {
+	addr := resolveAddr()
+
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    addr,
 		Handler: r,
 	}
 
@@ -79,4 +82,15 @@ func gracefulShutdown(srv *http.Server) {
 	} else {
 		log.Info().Msg("Server gracefully stopped")
 	}
+}
+
+func resolveAddr() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return ":8080"
+	}
+	if strings.HasPrefix(port, ":") {
+		return port
+	}
+	return ":" + port
 }

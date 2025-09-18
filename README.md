@@ -113,7 +113,8 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.3.10)
+- `VERSION` (e.g., v0.3.11)
+- `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
 **Example:**
@@ -121,10 +122,11 @@ Control runtime behavior via:
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.10
+export VERSION=v0.3.11
 export GIT_COMMIT=abc1234
+export PORT=9090
 
-PORT=9090 make run
+make run
 ```
 
 ### Testing & Validation
