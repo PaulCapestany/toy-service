@@ -6,3 +6,6 @@ bin/
 
 # Log files
 *.log
+
+# Coverage reports
+coverage.out
