@@ -96,7 +96,7 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.3.5)
+- `VERSION` (e.g., v0.3.6)
 - `GIT_COMMIT` (e.g., abc1234)
 
 **Example:**
@@ -104,7 +104,7 @@ Control runtime behavior via:
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.5
+export VERSION=v0.3.6
 export GIT_COMMIT=abc1234
 
 make run
@@ -117,6 +117,12 @@ make test
 ```
 
 Tests verify that handlers respond correctly, match the OpenAPI spec, and respect the contract defined in `spec/openapi.yaml`.
+
+### Troubleshooting
+
+- **`go: command not found`** – Install Go 1.20+ and ensure it’s on your `PATH`, then rerun `make deps`.
+- **`gofmt: command not found`** – Go’s toolchain bundles `gofmt`; once Go is installed the `make fmt` target works.
+- **Ports already in use** – Another process might occupy `8080`; set `PORT` and update `cmd/server/main.go` or stop the conflicting service.
 
 ### Development Workflow
 

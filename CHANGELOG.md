@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.6 - 2025-09-18
+
+### docs: add troubleshooting tips
+
+Added a quick FAQ in the README covering missing Go tools and port conflicts, and updated version metadata to `v0.3.6`.
+
 ## v0.3.5 - 2025-09-18
 
 ### docs: add quick curl probes
