@@ -139,6 +139,9 @@ make run
 
 ```bash
 make test
+
+# Optional: quick coverage check
+go test ./... -cover
 ```
 
 Tests verify that handlers respond correctly, match the OpenAPI spec, and respect the contract defined in `spec/openapi.yaml`.
