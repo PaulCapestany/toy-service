@@ -142,6 +142,9 @@ make test
 
 # Optional: quick coverage check
 go test ./... -cover
+
+# Run a targeted test for quicker feedback
+go test ./cmd/server -run TestResolveAddr -v
 ```
 
 Tests verify that handlers respond correctly, match the OpenAPI spec, and respect the contract defined in `spec/openapi.yaml`.
