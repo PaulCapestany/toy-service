@@ -100,6 +100,9 @@ curl -s http://localhost:8080/version | jq
 
 # When the service runs inside Docker, use host.docker.internal instead of localhost
 curl -s http://host.docker.internal:8080/healthz | jq
+
+# Fail fast when endpoints are unavailable
+curl -sf http://localhost:8080/healthz
 ```
 
 > These examples use `jq` for pretty-printing; install it or drop the pipe if unavailable.
