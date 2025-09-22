@@ -140,18 +140,19 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.2.26)
+- `VERSION` (e.g., v0.2.27)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
 `LOG_VERBOSITY` defaults to `info`, so set it to `debug` (or higher) when you need extra detail.
+`SERVICE_ENV` defaults to `dev`, so override it when targeting staging or production.
 
 **Example:**
 ```bash
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.2.26
+export VERSION=v0.2.27
 export GIT_COMMIT=abc1234
 export PORT=9090
 
