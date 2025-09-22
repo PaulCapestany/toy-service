@@ -198,6 +198,10 @@ These commands align with the default CI workflow and help catch issues before p
 ## Related Projects
 
 - **[toy-web](https://github.com/paulcapestany/toy-web)**: A planned minimalistic frontend companion, designed as a simple HTML/JS client that interacts with `toy-service`. Ideal starting point for designers and frontend-focused contributors.
+
+### Contributing
+
+Interested in contributing? See `CONTRIBUTING.md` for workflow, commit conventions, and release guidance.
 - **[gitops](https://github.com/paulcapestany/gitops)**: Manages CI/CD (i.e. building and deployment) of the bitiq microservices using GitOps principles. Ideal starting point for SREs and infrastructure-focused contributors.
  
 ## Contributing
