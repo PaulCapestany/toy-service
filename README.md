@@ -155,6 +155,10 @@ export PORT=9090
 make run
 ```
 
+### Logging
+
+The server emits structured JSON logs via [`zerolog`](https://github.com/rs/zerolog); tail `stdout` to inspect runtime events.
+
 ### Testing & Validation
 
 ```bash
