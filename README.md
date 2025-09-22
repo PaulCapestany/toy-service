@@ -163,6 +163,7 @@ make run
 The server emits structured JSON logs via [`zerolog`](https://github.com/rs/zerolog); tail `stdout` to inspect runtime events.
 Pipe through `jq -c` for compact pretty-printing during local debugging.
 Each entry includes `level`, `time`, and `message` fields so you can filter quickly.
+For example, `jq 'select(.level=="error")'` will highlight only failures during tests.
 
 ### Testing & Validation
 
