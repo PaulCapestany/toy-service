@@ -141,6 +141,8 @@ Control runtime behavior via:
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
+`LOG_VERBOSITY` defaults to `info`, so set it to `debug` (or higher) when you need extra detail.
+
 **Example:**
 ```bash
 export SERVICE_ENV=prod
