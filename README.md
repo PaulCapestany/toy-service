@@ -175,6 +175,7 @@ Tests verify that handlers respond correctly, match the OpenAPI spec, and respec
 - **`go: command not found`** – Install Go 1.20+ and ensure it’s on your `PATH`, then rerun `make deps`.
 - **`gofmt: command not found`** – Go’s toolchain bundles `gofmt`; once Go is installed the `make fmt` target works.
 - **Ports already in use** – Another process might occupy `8080`; set `PORT` and update `cmd/server/main.go` or stop the conflicting service.
+- **Need more verbose logs?** – Set `LOG_VERBOSITY=debug` before `make run` to see request traces while troubleshooting.
 
 ### Development Workflow
 
