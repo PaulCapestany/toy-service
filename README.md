@@ -103,6 +103,14 @@ curl -s http://host.docker.internal:8080/healthz | jq
 
 # Fail fast when endpoints are unavailable
 curl -sf http://localhost:8080/healthz
+
+## Kubernetes Quick Tip
+
+If the service is running in a cluster and you want to test it locally without an ingress, port-forward the service:
+
+```bash
+kubectl -n default port-forward svc/toy-service 8080:8080
+```
 ```
 
 > These examples use `jq` for pretty-printing; install it or drop the pipe if unavailable.
