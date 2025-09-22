@@ -158,6 +158,7 @@ make run
 ### Logging
 
 The server emits structured JSON logs via [`zerolog`](https://github.com/rs/zerolog); tail `stdout` to inspect runtime events.
+Pipe through `jq -c` for compact pretty-printing during local debugging.
 
 ### Testing & Validation
 
