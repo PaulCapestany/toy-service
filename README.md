@@ -140,13 +140,14 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.2.29)
+- `VERSION` (e.g., v0.2.30)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
 `LOG_VERBOSITY` defaults to `info`, so set it to `debug` (or higher) when you need extra detail.
 `SERVICE_ENV` defaults to `dev`, so override it when targeting staging or production.
 `PORT` defaults to `8080`; change it when running multiple services locally.
+`FAKE_SECRET` defaults to `redacted`, so provide a real value for integration tests that rely on it.
 `GIT_COMMIT` defaults to `unknown` when running from source without CI metadata.
 
 **Example:**
@@ -154,7 +155,7 @@ Control runtime behavior via:
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.2.29
+export VERSION=v0.2.30
 export GIT_COMMIT=abc1234
 export PORT=9090
 
