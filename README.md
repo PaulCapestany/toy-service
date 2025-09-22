@@ -140,7 +140,7 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.2.31)
+- `VERSION` (e.g., v0.2.32)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
@@ -156,7 +156,7 @@ Valid values include `debug`, `info`, `warn`, and `error`.
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.2.31
+export VERSION=v0.2.32
 export GIT_COMMIT=abc1234
 export PORT=9090
 
@@ -170,6 +170,7 @@ Pipe through `jq -c` for compact pretty-printing during local debugging.
 Each entry includes `level`, `time`, and `message` fields so you can filter quickly.
 For example, `jq 'select(.level=="error")'` will highlight only failures during tests.
 Keep production runs at `LOG_VERBOSITY=info` to avoid excessive noise.
+Timestamps default to Unix seconds because `zerolog` is configured with `zerolog.TimeFormatUnix` in `cmd/server/main.go`.
 
 ### Testing & Validation
 
