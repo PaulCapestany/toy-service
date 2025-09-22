@@ -199,14 +199,12 @@ These commands align with the default CI workflow and help catch issues before p
 
 - **[toy-web](https://github.com/paulcapestany/toy-web)**: A planned minimalistic frontend companion, designed as a simple HTML/JS client that interacts with `toy-service`. Ideal starting point for designers and frontend-focused contributors.
 
-### Contributing
-
-Interested in contributing? See `CONTRIBUTING.md` for workflow, commit conventions, and release guidance.
+ 
 - **[gitops](https://github.com/paulcapestany/gitops)**: Manages CI/CD (i.e. building and deployment) of the bitiq microservices using GitOps principles. Ideal starting point for SREs and infrastructure-focused contributors.
  
 ## Contributing
 
-See `TODO.md` for upcoming tasks and `CHANGELOG.md` for past changes. Additional contributor details will be provided in `CONTRIBUTING.md` (as per planned TODOs).
+See `CONTRIBUTING.md` for workflow, commit conventions, and release guidance. Also check `TODO.md` for upcoming tasks and `CHANGELOG.md` for past changes.
 
 Fork, clone, and start experimenting. We welcome new contributors!
 
