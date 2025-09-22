@@ -129,6 +129,9 @@ PORT=9090 docker run -e PORT=9090 -p 9090:9090 --rm toy-service:latest
 # Or use the Makefile helpers
 make docker-build
 make docker-run
+
+# Stream container logs while debugging
+docker logs -f $(docker ps -q --filter ancestor=toy-service:latest)
 ```
 
 ### Environment Variables
