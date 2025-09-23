@@ -140,7 +140,7 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
-- `VERSION` (e.g., v0.2.32)
+- `VERSION` (e.g., v0.2.33)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
@@ -156,7 +156,7 @@ Valid values include `debug`, `info`, `warn`, and `error`.
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.2.32
+export VERSION=v0.2.33
 export GIT_COMMIT=abc1234
 export PORT=9090
 
@@ -195,6 +195,7 @@ Tests verify that handlers respond correctly, match the OpenAPI spec, and respec
 - **`gofmt: command not found`** – Go’s toolchain bundles `gofmt`; once Go is installed the `make fmt` target works.
 - **Ports already in use** – Another process might occupy `8080`; set `PORT` and update `cmd/server/main.go` or stop the conflicting service.
 - **Need more verbose logs?** – Set `LOG_VERBOSITY=debug` before `make run` to see request traces while troubleshooting.
+- **`jq: command not found`** – Drop the `| jq` suffix from the curl examples or install it via your package manager (e.g., `brew install jq`).
 
 ### Development Workflow
 
