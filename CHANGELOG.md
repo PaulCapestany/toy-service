@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.14 - 2025-10-08
+
+### chore: add go vet lint target
+
+Introduced a `make lint` helper that runs `go vet` for static analysis, documented it in the README, and updated default version metadata to `v0.3.14`.
+
 ## v0.3.11 - 2025-09-18
 
 ### feat: allow configuring listen port via PORT env

@@ -1,10 +1,11 @@
-.PHONY: help deps build fmt test run clean docker-build docker-run
+.PHONY: help deps build fmt lint test run clean docker-build docker-run
 
 help:
 	@echo "Available targets:"
 	@printf "  %-15s %s\n" "deps" "Download Go module dependencies"
 	@printf "  %-15s %s\n" "build" "Compile the toy-service binary"
 	@printf "  %-15s %s\n" "fmt" "Format all Go source files with gofmt"
+	@printf "  %-15s %s\n" "lint" "Run go vet for static analysis"
 	@printf "  %-15s %s\n" "test" "Run Go unit and integration tests"
 	@printf "  %-15s %s\n" "run" "Execute toy-service locally"
 	@printf "  %-15s %s\n" "clean" "Remove build artifacts"
@@ -22,6 +23,10 @@ build: deps
 fmt:
 	@echo "Formatting Go source files..."
 	gofmt -w $(shell find . -name '*.go' -not -path './vendor/*')
+
+lint: deps
+	@echo "Running go vet..."
+	GO111MODULE=on go vet ./...
 
 clean:
 	@echo "Removing build artifacts..."

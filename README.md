@@ -61,6 +61,7 @@ make help
 make deps      # download Go modules before building
 make build
 make fmt       # format Go source files
+make lint      # run go vet static checks
 make run
 
 # Clear build artifacts if you need a fresh build
@@ -176,6 +177,7 @@ Timestamps default to Unix seconds because `zerolog` is configured with `zerolog
 ### Testing & Validation
 
 ```bash
+make lint
 make test
 
 # Optional: quick coverage check
