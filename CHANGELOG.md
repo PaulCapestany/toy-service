@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.18 - 2025-10-08
+
+### chore: clean coverage artifacts
+
+Updated `make clean` to remove generated coverage outputs, documented the behavior, and refreshed default metadata to `v0.3.18`.
+
 ## v0.3.17 - 2025-10-08
 
 ### chore: add coverage html export

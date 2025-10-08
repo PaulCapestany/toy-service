@@ -32,7 +32,7 @@ lint: deps
 
 clean:
 	@echo "Removing build artifacts..."
-	@rm -rf ./bin
+	@rm -rf ./bin coverage.out coverage.html
 
 test: deps
 	@echo "Running tests..."

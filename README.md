@@ -64,7 +64,7 @@ make fmt       # format Go source files
 make lint      # run go vet static checks
 make run
 
-# Clear build artifacts if you need a fresh build
+# Clear build artifacts and coverage reports if you need a fresh build
 make clean
 
 # Run the test suite
