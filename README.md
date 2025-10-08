@@ -60,7 +60,7 @@ toy-service/
 make help
 make deps      # download Go modules before building
 make build
-make fmt
+make fmt       # format Go source files
 make run
 
 # Clear build artifacts if you need a fresh build
