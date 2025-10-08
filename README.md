@@ -58,6 +58,7 @@ toy-service/
 **Steps:**
 ```bash
 make help
+make deps      # download Go modules before building
 make build
 make fmt
 make run
