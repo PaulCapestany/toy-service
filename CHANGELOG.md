@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.15 - 2025-10-08
+
+### chore: add coverage make target
+
+Added a `make coverage` helper that runs `go test` with coverage output, documented it in the README, and refreshed default version metadata to `v0.3.15`.
+
 ## v0.3.14 - 2025-10-08
 
 ### chore: add go vet lint target

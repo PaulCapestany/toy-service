@@ -70,6 +70,9 @@ make clean
 # Run the test suite
 make test
 
+# Generate coverage profile (coverage.out)
+make coverage
+
 # Override the listen port (defaults to 8080)
 PORT=9090 make run
 
@@ -181,7 +184,7 @@ make lint
 make test
 
 # Optional: quick coverage check
-go test ./... -cover
+make coverage
 
 # Run a targeted test for quicker feedback
 go test ./cmd/server -run TestResolveAddr -v

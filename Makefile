@@ -1,4 +1,4 @@
-.PHONY: help deps build fmt lint test run clean docker-build docker-run
+.PHONY: help deps build fmt lint test run clean coverage docker-build docker-run
 
 help:
 	@echo "Available targets:"
@@ -9,6 +9,7 @@ help:
 	@printf "  %-15s %s\n" "test" "Run Go unit and integration tests"
 	@printf "  %-15s %s\n" "run" "Execute toy-service locally"
 	@printf "  %-15s %s\n" "clean" "Remove build artifacts"
+	@printf "  %-15s %s\n" "coverage" "Generate Go coverage profile"
 	@printf "  %-15s %s\n" "docker-build" "Build the Docker image"
 	@printf "  %-15s %s\n" "docker-run" "Run the Docker container exposing port 8080"
 
@@ -35,6 +36,10 @@ clean:
 test: deps
 	@echo "Running tests..."
 	GO111MODULE=on go test ./... -v -cover
+
+coverage: deps
+	@echo "Generating coverage report..."
+	GO111MODULE=on go test ./... -coverprofile=coverage.out
 
 run: build
 	@echo "Running toy-service locally..."
