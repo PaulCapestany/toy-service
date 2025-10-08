@@ -8,7 +8,7 @@ help:
 	@printf "  %-15s %s\n" "lint" "Run go vet for static analysis"
 	@printf "  %-15s %s\n" "test" "Run Go unit and integration tests"
 	@printf "  %-15s %s\n" "run" "Execute toy-service locally"
-	@printf "  %-15s %s\n" "clean" "Remove build artifacts"
+	@printf "  %-15s %s\n" "clean" "Remove build and coverage artifacts"
 	@printf "  %-15s %s\n" "coverage" "Generate Go coverage profile"
 	@printf "  %-15s %s\n" "coverage-html" "Export annotated HTML coverage report"
 	@printf "  %-15s %s\n" "docker-build" "Build the Docker image"

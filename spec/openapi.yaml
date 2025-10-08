@@ -101,7 +101,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.3.18"
+          example: "v0.3.19"
         commit:
           type: string
           description: Git commit hash or short SHA
@@ -126,7 +126,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.3.18"
+          example: "v0.3.19"
         env:
           type: string
           description: Current runtime environment
@@ -161,7 +161,7 @@ components:
         version:
           type: string
           description: Semantic version string for the running build
-          example: "v0.3.18"
+          example: "v0.3.19"
         commit:
           type: string
           description: Git commit hash or short SHA for the running build

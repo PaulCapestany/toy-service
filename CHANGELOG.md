@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.19 - 2025-10-08
+
+### chore: clarify clean target
+
+Updated `make clean` help text to note it clears coverage files and refreshed default metadata to `v0.3.19`.
+
 ## v0.3.18 - 2025-10-08
 
 ### chore: clean coverage artifacts
