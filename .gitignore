@@ -9,6 +9,7 @@ bin/
 
 # Coverage reports
 coverage.out
+coverage.html
 
 # Temporary artifacts
 *.tmp

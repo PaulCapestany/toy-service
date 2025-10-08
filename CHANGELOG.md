@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.17 - 2025-10-08
+
+### chore: add coverage html export
+
+Added a `make coverage-html` helper that writes `coverage.html`, ignored it from Git, documented the workflow, and bumped defaults to `v0.3.17`.
+
 ## v0.3.16 - 2025-10-08
 
 ### chore: show coverage summary

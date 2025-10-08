@@ -72,6 +72,8 @@ make test
 
 # Generate coverage profile (coverage.out) and summary
 make coverage
+# Export HTML coverage report (coverage.html)
+make coverage-html
 
 # Override the listen port (defaults to 8080)
 PORT=9090 make run
@@ -185,8 +187,10 @@ make test
 
 # Optional: quick coverage check with summary
 make coverage
-# View HTML report (open in your browser)
-go tool cover -html=coverage.out
+# Export annotated HTML report to coverage.html
+make coverage-html
+# View the report in your browser (macOS example; use xdg-open on Linux)
+open coverage.html
 
 # Run a targeted test for quicker feedback
 go test ./cmd/server -run TestResolveAddr -v
