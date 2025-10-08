@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.16 - 2025-10-08
+
+### chore: show coverage summary
+
+Enhanced `make coverage` to print the total coverage line and documented how to preview the HTML report, while updating defaults to `v0.3.16`.
+
 ## v0.3.15 - 2025-10-08
 
 ### chore: add coverage make target

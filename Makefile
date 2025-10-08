@@ -40,6 +40,8 @@ test: deps
 coverage: deps
 	@echo "Generating coverage report..."
 	GO111MODULE=on go test ./... -coverprofile=coverage.out
+	@echo "Coverage summary:"
+	@go tool cover -func=coverage.out | tail -n 1
 
 run: build
 	@echo "Running toy-service locally..."

@@ -70,7 +70,7 @@ make clean
 # Run the test suite
 make test
 
-# Generate coverage profile (coverage.out)
+# Generate coverage profile (coverage.out) and summary
 make coverage
 
 # Override the listen port (defaults to 8080)
@@ -183,8 +183,10 @@ Timestamps default to Unix seconds because `zerolog` is configured with `zerolog
 make lint
 make test
 
-# Optional: quick coverage check
+# Optional: quick coverage check with summary
 make coverage
+# View HTML report (open in your browser)
+go tool cover -html=coverage.out
 
 # Run a targeted test for quicker feedback
 go test ./cmd/server -run TestResolveAddr -v
