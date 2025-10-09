@@ -26,6 +26,12 @@ This project pairs well with [toy-web](https://github.com/paulcapestany/toy-web)
 - **Robust Testing & Validation:**  
   Comprehensive tests ensure the service meets its OpenAPI contract and that changes are safe and well-defined.
 
+## Deployment via GitOps
+
+This repository intentionally excludes Kubernetes manifests. Runtime deployment configuration lives in [bitiq-io/gitops](https://github.com/bitiq-io/gitops) under `charts/toy-service/`. Update that repository when you need to change image tags, env overlays, or pause Argo CD Image Updater.
+
+When issues or pull requests here depend on deployment changes, include links to the relevant GitOps chart or values files so reviewers can follow the rollout. Keeping manifests in the GitOps repo ensures Argo CD remains the single source of truth—please do not add cluster YAML directly to `toy-service`.
+
 ## Project Structure
 
 ```text
@@ -113,7 +119,7 @@ curl -sf http://localhost:8080/healthz
 
 ## Kubernetes Quick Tip
 
-If the service is running in a cluster and you want to test it locally without an ingress, port-forward the service:
+After the GitOps repo deploys `toy-service`, you can port-forward the ClusterIP Service to exercise the API locally without exposing an ingress:
 
 ```bash
 kubectl -n default port-forward svc/toy-service 8080:8080
