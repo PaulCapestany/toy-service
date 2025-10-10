@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.20 - 2025-10-09
+
+### feat: allow HEAD requests in CORS
+
+Expanded the CORS middleware to accept HEAD requests and refreshed default metadata to `v0.3.20`.
+
 ## v0.3.19 - 2025-10-08
 
 ### chore: clarify clean target
