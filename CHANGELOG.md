@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.22 - 2025-10-10
+
+### test: assert echo JSON error
+
+Added a unit test ensuring `/echo` returns a JSON error and correct content type when the `message` field is empty. Refreshed default/version metadata to `v0.3.22` across docs and config.
+
 ## v0.3.21 - 2025-10-10
 
 ### fix: return JSON error for invalid echo input

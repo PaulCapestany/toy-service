@@ -34,3 +34,24 @@ func TestEchoHandler(t *testing.T) {
 	require.NotEmpty(t, resp.Commit)
 	require.NotEmpty(t, resp.Env)
 }
+
+func TestEchoHandler_EmptyMessage(t *testing.T) {
+	t.Log("Test that /echo rejects empty message payloads with JSON error")
+
+	r := chi.NewRouter()
+	r.Post("/echo", EchoHandler)
+
+	reqBody := `{"message":""}`
+	req, err := http.NewRequest("POST", "/echo", bytes.NewBuffer([]byte(reqBody)))
+	require.NoError(t, err)
+
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	require.Equal(t, http.StatusBadRequest, w.Code)
+	require.Equal(t, "application/json", w.Header().Get("Content-Type"))
+
+	var resp map[string]string
+	err = json.Unmarshal(w.Body.Bytes(), &resp)
+	require.NoError(t, err)
+	require.Equal(t, "Invalid input", resp["error"])
+}
