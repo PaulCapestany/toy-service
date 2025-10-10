@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.21 - 2025-10-10
+
+### fix: return JSON error for invalid echo input
+
+Updated the `/echo` handler to return a proper JSON error payload with `application/json` content type on invalid input (400), aligning behavior with the OpenAPI spec. Refreshed default/version metadata to `v0.3.21` across code, docs, and spec.
+
 ## v0.3.20 - 2025-10-09
 
 ### feat: allow HEAD requests in CORS

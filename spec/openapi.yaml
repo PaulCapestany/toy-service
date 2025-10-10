@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Toy Microservice
-  version: 0.3.11
+  version: 0.3.21
   description: >
     A simple toy service that demonstrates echo functionality, version/environment metadata,
     and health checks. It supports semantic versioning and provides endpoints to retrieve 
@@ -101,7 +101,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.3.20"
+          example: "v0.3.21"
         commit:
           type: string
           description: Git commit hash or short SHA
@@ -126,7 +126,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.3.20"
+          example: "v0.3.21"
         env:
           type: string
           description: Current runtime environment
@@ -161,7 +161,7 @@ components:
         version:
           type: string
           description: Semantic version string for the running build
-          example: "v0.3.20"
+          example: "v0.3.21"
         commit:
           type: string
           description: Git commit hash or short SHA for the running build
