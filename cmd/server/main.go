@@ -33,7 +33,7 @@ func main() {
 	// Just allow any origin during local dev. This can be narrowed down as needed.
 	r.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"*"},
-		AllowedMethods:   []string{"GET", "POST", "OPTIONS"},
+		AllowedMethods:   []string{"GET", "POST", "HEAD", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
 		ExposedHeaders:   []string{"X-Request-Id"},
 		AllowCredentials: false,
