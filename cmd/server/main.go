@@ -26,6 +26,12 @@ import (
 func main() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 	log.Info().Msg("Starting toy-service server")
+	// Emit a safe signal about FAKE_SECRET presence (never log the value)
+	if v := os.Getenv("FAKE_SECRET"); v != "" {
+		log.Info().Int("fakeSecretLen", len(v)).Msg("FAKE_SECRET present")
+	} else {
+		log.Info().Msg("FAKE_SECRET not set")
+	}
 
 	r := chi.NewRouter()
 
@@ -46,6 +52,8 @@ func main() {
 	r.Post("/echo", handlers.EchoHandler)
 	r.Get("/info", handlers.InfoHandler)
 	r.Get("/version", handlers.VersionHandler)
+	// Internal (non-public) endpoint to verify secret presence without exposing values
+	r.Get("/internal/config", handlers.ConfigHandler)
 
 	srv := startServer(r)
 	gracefulShutdown(srv)
