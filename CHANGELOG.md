@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.23 - 2025-10-13
+
+### fix: harden port parsing
+
+Trim whitespace, validate the `PORT` env var before starting the HTTP server, and fall back to the default when invalid. Added tests covering whitespace and invalid values and refreshed default metadata to `v0.3.23`.
+
 ## v0.3.22 - 2025-10-10
 
 ### test: assert echo JSON error

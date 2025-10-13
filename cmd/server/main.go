@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"strings"
 	"syscall"
 	"time"
@@ -85,12 +86,25 @@ func gracefulShutdown(srv *http.Server) {
 }
 
 func resolveAddr() string {
-	port := os.Getenv("PORT")
+	raw := os.Getenv("PORT")
+	port := strings.TrimSpace(raw)
 	if port == "" {
 		return ":8080"
 	}
+
 	if strings.HasPrefix(port, ":") {
-		return port
+		port = port[1:]
 	}
+
+	if port == "" {
+		log.Warn().Msg("PORT env var missing port number; defaulting to :8080")
+		return ":8080"
+	}
+
+	if _, err := strconv.Atoi(port); err != nil {
+		log.Warn().Str("port", raw).Msg("Invalid PORT env var; defaulting to :8080")
+		return ":8080"
+	}
+
 	return ":" + port
 }
