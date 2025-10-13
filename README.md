@@ -96,6 +96,7 @@ By default, the service runs at http://localhost:8080.
 - **POST /echo:** Accepts a JSON `{"message":"..."}`, returns modified message plus version info.
 - **GET /info:** Returns environment, version, commit hash, and more.
 - **GET /version:** Lightweight health/version probe that returns only the service name, version, and commit hash.
+ - **GET /internal/config:** Internal-only helper that reports whether `FAKE_SECRET` is present (and its length), without exposing the value.
 
 #### Quick API Checks
 
@@ -110,6 +111,9 @@ curl -s http://localhost:8080/info | jq
 
 # Lightweight version check
 curl -s http://localhost:8080/version | jq
+
+# Secret presence (internal)
+curl -s http://localhost:8080/internal/config | jq
 
 # When the service runs inside Docker, use host.docker.internal instead of localhost
 curl -s http://host.docker.internal:8080/healthz | jq
