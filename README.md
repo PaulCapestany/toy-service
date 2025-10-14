@@ -17,6 +17,9 @@ This project pairs well with [toy-web](https://github.com/paulcapestany/toy-web)
 - **OpenAPI-defined endpoints:**  
   The API contract is clearly defined in `spec/openapi.yaml`, aiding clarity and validation.
 
+- **Live reload of secrets (opt‑in):**  
+  When running on Kubernetes, the service can re‑read a mounted Secret at runtime via a minimal reload webhook (`POST /-/reload`). This pairs with a tiny sidecar (e.g., `configmap-reload`) that watches the mounted secret directory and POSTs the endpoint on change. See Live Secret Reload below.
+
 - **Semantic Versioning & Conventional Commits:**  
   We strictly follow [SemVer](https://semver.org/) and encourage [Conventional Commits](https://www.conventionalcommits.org/) to communicate change impact clearly.
 
@@ -97,6 +100,7 @@ By default, the service runs at http://localhost:8080.
 - **GET /info:** Returns environment, version, commit hash, and more.
 - **GET /version:** Lightweight health/version probe that returns only the service name, version, and commit hash.
  - **GET /internal/config:** Internal-only helper that reports whether `FAKE_SECRET` is present (and its length), without exposing the value.
+ - **POST /-/reload:** Reloads secrets from a mounted directory into process env (see Live Secret Reload).
 
 #### Quick API Checks
 
@@ -157,6 +161,7 @@ Control runtime behavior via:
 - `SERVICE_ENV` (e.g., dev, prod)
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
+  - When using file‑based reloads, this is set dynamically by `/-/reload` and does not need to be provided at process start.
 - `VERSION` (e.g., v0.3.23)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
@@ -210,6 +215,51 @@ make -n help
 ```
 
 Tests verify that handlers respond correctly, match the OpenAPI spec, and respect the contract defined in `spec/openapi.yaml`.
+
+### Live Secret Reload (Kubernetes)
+
+In Kubernetes, prefer mounting Secrets as files (not env vars) so rotations can be applied without pod restarts. `toy-service` includes an opt‑in webhook (`POST /-/reload`) that re‑reads the `FAKE_SECRET` file from a mounted directory and updates the process environment so subsequent handler calls observe the new value via `os.Getenv`.
+
+Defaults:
+
+- Secret mount directory: `/etc/backend-secret`
+- Secret key: `FAKE_SECRET` (file path `/etc/backend-secret/FAKE_SECRET`)
+- Override base directory via `SECRET_FILE_DIR` (optional).
+
+Example curl (local run):
+
+```bash
+# Set an initial value, run the server, then change the file and POST reload
+export FAKE_SECRET=one
+make run &
+sleep 1
+curl -s http://localhost:8080/internal/config | jq  # shows presence and length
+
+# Simulate a file-mounted secret (for local only)
+mkdir -p /tmp/secret && echo -n two >/tmp/secret/FAKE_SECRET
+SECRET_FILE_DIR=/tmp/secret curl -s -X POST http://localhost:8080/-/reload
+curl -s http://localhost:8080/internal/config | jq  # reflects new length
+```
+
+In Kubernetes, pair the endpoint with a sidecar such as `configmap-reload`:
+
+```yaml
+# container excerpt
+- name: configmap-reload
+  image: ghcr.io/jimmidyson/configmap-reload:latest
+  args:
+    - --volume-dir=/etc/backend-secret
+    - --webhook-url=http://127.0.0.1:8080/-/reload
+    - --webhook-method=POST
+  volumeMounts:
+    - name: backend-secret
+      mountPath: /etc/backend-secret
+      readOnly: true
+```
+
+Security notes:
+- Never log secret values; `toy-service` only exposes presence/length via `/internal/config`.
+- For services that cannot reload safely (e.g., DB drivers that read once), prefer orchestrated rolling restarts. If you use HashiCorp VSO, set `spec.rolloutRestartTargets` on the `VaultStaticSecret` to trigger a targeted restart only when the secret changes.
 
 ### Troubleshooting
 
