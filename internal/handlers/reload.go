@@ -1,9 +1,9 @@
 package handlers
 
 import (
-    "io/ioutil"
     "net/http"
     "os"
+    "strings"
 
     "github.com/rs/zerolog/log"
 )
@@ -21,15 +21,15 @@ func ReloadHandler(w http.ResponseWriter, r *http.Request) {
     }
     path := base + "/FAKE_SECRET"
 
-    data, err := ioutil.ReadFile(path)
+    data, err := os.ReadFile(path)
     if err != nil {
         log.Error().Err(err).Str("path", path).Msg("failed reading secret file")
         http.Error(w, "failed to read secret file", http.StatusInternalServerError)
         return
     }
 
-    // Trim trailing newlines if present (kube Secret keys are raw bytes, typically no newline)
-    val := string(data)
+    // Trim trailing newlines/whitespace if present (kube Secret keys are raw bytes)
+    val := strings.TrimRight(string(data), "\r\n")
     // Update process env so subsequent os.Getenv reads see the new value
     if err := os.Setenv("FAKE_SECRET", val); err != nil {
         log.Error().Err(err).Msg("failed setting env")
@@ -39,4 +39,3 @@ func ReloadHandler(w http.ResponseWriter, r *http.Request) {
     w.WriteHeader(http.StatusOK)
     _, _ = w.Write([]byte("ok"))
 }
-

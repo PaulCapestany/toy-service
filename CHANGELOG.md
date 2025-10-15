@@ -158,3 +158,10 @@ The server now returns a `400 Bad Request` if the `message` field is missing or 
   - /healthz endpoint
   - Basic test coverage
     - Dockerfile, Makefile, and README
+## v0.3.24 - 2025-10-15
+
+### Fixed
+- Trim trailing newlines when reloading `FAKE_SECRET` from file and switch to `os.ReadFile` for Go 1.20+ compatibility in `/-/reload`.
+
+### Added
+- Merge `feat/reload-endpoint-and-file-secret` into `main` providing `/-/reload` endpoint and internal `/internal/config` summary.
