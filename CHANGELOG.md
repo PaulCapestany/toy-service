@@ -165,3 +165,7 @@ The server now returns a `400 Bad Request` if the `message` field is missing or 
 
 ### Added
 - Merge `feat/reload-endpoint-and-file-secret` into `main` providing `/-/reload` endpoint and internal `/internal/config` summary.
+## v0.3.25 - 2025-10-15
+
+### Fixed
+- `/-/reload` now returns JSON with proper `Content-Type` for success and errors.

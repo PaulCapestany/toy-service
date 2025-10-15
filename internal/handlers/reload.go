@@ -1,6 +1,7 @@
 package handlers
 
 import (
+    "encoding/json"
     "net/http"
     "os"
     "strings"
@@ -24,7 +25,9 @@ func ReloadHandler(w http.ResponseWriter, r *http.Request) {
     data, err := os.ReadFile(path)
     if err != nil {
         log.Error().Err(err).Str("path", path).Msg("failed reading secret file")
-        http.Error(w, "failed to read secret file", http.StatusInternalServerError)
+        w.Header().Set("Content-Type", "application/json")
+        w.WriteHeader(http.StatusInternalServerError)
+        _ = json.NewEncoder(w).Encode(map[string]string{"error": "failed to read secret file"})
         return
     }
 
@@ -33,9 +36,12 @@ func ReloadHandler(w http.ResponseWriter, r *http.Request) {
     // Update process env so subsequent os.Getenv reads see the new value
     if err := os.Setenv("FAKE_SECRET", val); err != nil {
         log.Error().Err(err).Msg("failed setting env")
-        http.Error(w, "failed setting env", http.StatusInternalServerError)
+        w.Header().Set("Content-Type", "application/json")
+        w.WriteHeader(http.StatusInternalServerError)
+        _ = json.NewEncoder(w).Encode(map[string]string{"error": "failed setting env"})
         return
     }
+    w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
-    _, _ = w.Write([]byte("ok"))
+    _ = json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }

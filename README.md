@@ -162,7 +162,7 @@ Control runtime behavior via:
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
   - When using file‑based reloads, this is set dynamically by `/-/reload` and does not need to be provided at process start.
-- `VERSION` (e.g., v0.3.24)
+- `VERSION` (e.g., v0.3.25)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
@@ -178,7 +178,7 @@ Valid values include `debug`, `info`, `warn`, and `error`.
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.24
+export VERSION=v0.3.25
 export GIT_COMMIT=abc1234
 export PORT=9090
 
