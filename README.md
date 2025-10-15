@@ -162,7 +162,7 @@ Control runtime behavior via:
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
   - When using file‑based reloads, this is set dynamically by `/-/reload` and does not need to be provided at process start.
-- `VERSION` (e.g., v0.3.25)
+- `VERSION` (e.g., v0.3.26)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
@@ -178,7 +178,7 @@ Valid values include `debug`, `info`, `warn`, and `error`.
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.25
+export VERSION=v0.3.26
 export GIT_COMMIT=abc1234
 export PORT=9090
 
@@ -218,7 +218,7 @@ Tests verify that handlers respond correctly, match the OpenAPI spec, and respec
 
 ### Live Secret Reload (Kubernetes)
 
-In Kubernetes, prefer mounting Secrets as files (not env vars) so rotations can be applied without pod restarts. `toy-service` includes an opt‑in webhook (`POST /-/reload`) that re‑reads the `FAKE_SECRET` file from a mounted directory and updates the process environment so subsequent handler calls observe the new value via `os.Getenv`.
+In Kubernetes, prefer mounting Secrets as files (not env vars) so rotations can be applied without pod restarts. `toy-service` includes an opt‑in webhook (`POST /-/reload`) that re‑reads the `FAKE_SECRET` file from a mounted directory and updates the process environment so subsequent handler calls observe the new value via `os.Getenv`. The endpoint returns JSON confirming the reload and exposes the resulting `fakeSecretLen` for quick verification (never the secret value).
 
 Defaults:
 
@@ -238,6 +238,7 @@ curl -s http://localhost:8080/internal/config | jq  # shows presence and length
 # Simulate a file-mounted secret (for local only)
 mkdir -p /tmp/secret && echo -n two >/tmp/secret/FAKE_SECRET
 SECRET_FILE_DIR=/tmp/secret curl -s -X POST http://localhost:8080/-/reload
+# => {"status":"ok","fakeSecretLen":3}
 curl -s http://localhost:8080/internal/config | jq  # reflects new length
 ```
 
