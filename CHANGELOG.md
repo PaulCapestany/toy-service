@@ -165,6 +165,15 @@ The server now returns a `400 Bad Request` if the `message` field is missing or 
 
 ### Added
 - Merge `feat/reload-endpoint-and-file-secret` into `main` providing `/-/reload` endpoint and internal `/internal/config` summary.
+## v0.3.27 - 2025-10-15
+
+### Fixed
+- Build secret file paths with `filepath.Join` so `/-/reload` works across platforms and with trailing separators.
+
+### Added
+- Regression test covering reloads when `SECRET_FILE_DIR` includes a trailing separator.
+- Refresh documentation/spec defaults to `v0.3.27`.
+
 ## v0.3.26 - 2025-10-15
 
 ### Added

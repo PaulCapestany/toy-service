@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/rs/zerolog/log"
@@ -27,7 +28,7 @@ func ReloadHandler(w http.ResponseWriter, r *http.Request) {
 	if base == "" {
 		base = "/etc/backend-secret"
 	}
-	path := base + "/FAKE_SECRET"
+	path := filepath.Join(base, "FAKE_SECRET")
 
 	data, err := os.ReadFile(path)
 	if err != nil {

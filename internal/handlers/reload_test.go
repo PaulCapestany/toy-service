@@ -14,7 +14,7 @@ import (
 
 func TestReloadHandler_Success(t *testing.T) {
 	dir := t.TempDir()
-	t.Setenv("SECRET_FILE_DIR", dir)
+	t.Setenv("SECRET_FILE_DIR", dir+string(os.PathSeparator))
 	t.Setenv("FAKE_SECRET", "old-secret")
 
 	secretValue := "new-secret\n"
