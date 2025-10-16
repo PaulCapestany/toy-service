@@ -37,4 +37,11 @@ func TestResolveAddr(t *testing.T) {
 			t.Fatalf("expected fallback :8080, got %s", got)
 		}
 	})
+
+	t.Run("outOfRangePortFallsBack", func(t *testing.T) {
+		t.Setenv("PORT", "70000")
+		if got := resolveAddr(); got != ":8080" {
+			t.Fatalf("expected fallback :8080 for out-of-range port, got %s", got)
+		}
+	})
 }

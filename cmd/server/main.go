@@ -112,8 +112,14 @@ func resolveAddr() string {
 		return ":8080"
 	}
 
-	if _, err := strconv.Atoi(port); err != nil {
+	p, err := strconv.Atoi(port)
+	if err != nil {
 		log.Warn().Str("port", raw).Msg("Invalid PORT env var; defaulting to :8080")
+		return ":8080"
+	}
+
+	if p < 1 || p > 65535 {
+		log.Warn().Str("port", raw).Msg("PORT env var out of range; defaulting to :8080")
 		return ":8080"
 	}
 

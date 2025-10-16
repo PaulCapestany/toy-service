@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.29 - 2025-10-16
+
+### fix: reject out-of-range ports
+
+- Guard against `PORT` values outside 1-65535 so the server always binds safely.
+- Extend tests covering port validation and refresh default metadata to `v0.3.29`.
+
 ## v0.3.28 - 2025-10-16
 
 ### fix: guard slowloris clients
