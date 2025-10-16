@@ -53,9 +53,9 @@ func main() {
 	r.Get("/info", handlers.InfoHandler)
 	r.Get("/version", handlers.VersionHandler)
 	// Internal (non-public) endpoint to verify secret presence without exposing values
-    r.Get("/internal/config", handlers.ConfigHandler)
-    // Reload endpoint for in-place secret reloads from mounted files
-    r.Post("/-/reload", handlers.ReloadHandler)
+	r.Get("/internal/config", handlers.ConfigHandler)
+	// Reload endpoint for in-place secret reloads from mounted files
+	r.Post("/-/reload", handlers.ReloadHandler)
 
 	srv := startServer(r)
 	gracefulShutdown(srv)
@@ -65,8 +65,9 @@ func startServer(r *chi.Mux) *http.Server {
 	addr := resolveAddr()
 
 	srv := &http.Server{
-		Addr:    addr,
-		Handler: r,
+		Addr:              addr,
+		Handler:           r,
+		ReadHeaderTimeout: 5 * time.Second,
 	}
 
 	go func() {

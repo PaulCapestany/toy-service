@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.28 - 2025-10-16
+
+### fix: guard slowloris clients
+
+- Apply `ReadHeaderTimeout` on the HTTP server to mitigate slow header reads.
+- Refresh default version metadata references to `v0.3.28`.
+
 ## v0.3.23 - 2025-10-13
 
 ### fix: harden port parsing
