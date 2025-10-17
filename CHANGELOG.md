@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.30 - 2025-10-17
+
+### fix: enforce server I/O timeouts
+
+- Add read, write, and idle timeouts to the HTTP server so slow clients cannot tie up connections indefinitely.
+- Refresh default metadata references to `v0.3.30`.
+
 ## v0.3.29 - 2025-10-16
 
 ### fix: reject out-of-range ports
