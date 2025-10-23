@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.31 - 2025-10-23
+
+### fix: reject unknown fields in echo payloads
+
+- Disallow unknown JSON fields in `/echo` requests and add a regression test covering the failure case.
+- Refresh default metadata references to `v0.3.31`.
+
 ## v0.3.30 - 2025-10-17
 
 ### fix: enforce server I/O timeouts

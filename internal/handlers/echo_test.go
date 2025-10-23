@@ -55,3 +55,24 @@ func TestEchoHandler_EmptyMessage(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, "Invalid input", resp["error"])
 }
+
+func TestEchoHandler_UnknownField(t *testing.T) {
+	t.Log("Test that /echo rejects payloads with unknown fields")
+
+	r := chi.NewRouter()
+	r.Post("/echo", EchoHandler)
+
+	reqBody := `{"message":"hi","unexpected":"value"}`
+	req, err := http.NewRequest("POST", "/echo", bytes.NewBuffer([]byte(reqBody)))
+	require.NoError(t, err)
+
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	require.Equal(t, http.StatusBadRequest, w.Code)
+	require.Equal(t, "application/json", w.Header().Get("Content-Type"))
+
+	var resp map[string]string
+	err = json.Unmarshal(w.Body.Bytes(), &resp)
+	require.NoError(t, err)
+	require.Equal(t, "Invalid input", resp["error"])
+}

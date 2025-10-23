@@ -6,10 +6,10 @@
 package handlers
 
 import (
-    "encoding/json"
-    "net/http"
+	"encoding/json"
+	"net/http"
 
-    "github.com/rs/zerolog/log"
+	"github.com/rs/zerolog/log"
 )
 
 type EchoRequest struct {
@@ -27,19 +27,21 @@ type EchoResponse struct {
 // It echoes back the input message, appending " [modified]", and returns
 // version, commit, and environment info.
 func EchoHandler(w http.ResponseWriter, r *http.Request) {
-    log.Debug().Msg("Handling /echo request")
+	log.Debug().Msg("Handling /echo request")
 
-    var req EchoRequest
-    if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-        log.Error().Err(err).Msg("Failed to decode /echo request body")
-        writeJSONError(w, http.StatusBadRequest, "Invalid input")
-        return
-    }
+	var req EchoRequest
+	decoder := json.NewDecoder(r.Body)
+	decoder.DisallowUnknownFields()
+	if err := decoder.Decode(&req); err != nil {
+		log.Error().Err(err).Msg("Failed to decode /echo request body")
+		writeJSONError(w, http.StatusBadRequest, "Invalid input")
+		return
+	}
 
-    if req.Message == "" {
-        writeJSONError(w, http.StatusBadRequest, "Invalid input")
-        return
-    }
+	if req.Message == "" {
+		writeJSONError(w, http.StatusBadRequest, "Invalid input")
+		return
+	}
 
 	cfg := LoadEnvConfig()
 
@@ -51,18 +53,18 @@ func EchoHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-    if err := json.NewEncoder(w).Encode(resp); err != nil {
-        log.Error().Err(err).Msg("Failed to write /echo response")
-        http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-        return
-    }
+	if err := json.NewEncoder(w).Encode(resp); err != nil {
+		log.Error().Err(err).Msg("Failed to write /echo response")
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
 
 	log.Debug().Msg("/echo response successfully returned")
 }
 
 // writeJSONError writes a JSON error payload with the provided status code.
 func writeJSONError(w http.ResponseWriter, code int, msg string) {
-    w.Header().Set("Content-Type", "application/json")
-    w.WriteHeader(code)
-    _ = json.NewEncoder(w).Encode(map[string]string{"error": msg})
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+	_ = json.NewEncoder(w).Encode(map[string]string{"error": msg})
 }
