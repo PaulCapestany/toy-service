@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/go-chi/chi/v5"
@@ -75,4 +76,26 @@ func TestEchoHandler_UnknownField(t *testing.T) {
 	err = json.Unmarshal(w.Body.Bytes(), &resp)
 	require.NoError(t, err)
 	require.Equal(t, "Invalid input", resp["error"])
+}
+
+func TestEchoHandler_TooLarge(t *testing.T) {
+	t.Log("Test that /echo rejects payloads larger than the configured limit")
+
+	r := chi.NewRouter()
+	r.Post("/echo", EchoHandler)
+
+	oversized := strings.Repeat("a", maxEchoBodyBytes+1)
+	reqBody := `{"message":"` + oversized + `"}` // single field with huge value
+	req, err := http.NewRequest("POST", "/echo", bytes.NewBufferString(reqBody))
+	require.NoError(t, err)
+
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	require.Equal(t, http.StatusRequestEntityTooLarge, w.Code)
+	require.Equal(t, "application/json", w.Header().Get("Content-Type"))
+
+	var resp map[string]string
+	err = json.Unmarshal(w.Body.Bytes(), &resp)
+	require.NoError(t, err)
+	require.Equal(t, "Payload too large (max 1MiB)", resp["error"])
 }

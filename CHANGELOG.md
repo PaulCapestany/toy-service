@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.32 - 2025-10-23
+
+### fix: cap echo payload size
+
+- Limit `/echo` request bodies to 1 MiB to prevent excessive memory usage and respond with 413 when exceeded.
+- Refresh default metadata references to `v0.3.32`.
+
 ## v0.3.31 - 2025-10-23
 
 ### fix: reject unknown fields in echo payloads

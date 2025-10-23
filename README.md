@@ -96,7 +96,7 @@ By default, the service runs at http://localhost:8080.
 ### Example Endpoints
 
 - **GET /healthz:** Check if the service is running.
-- **POST /echo:** Accepts a JSON `{"message":"..."}`, returns modified message plus version info.
+- **POST /echo:** Accepts a JSON `{"message":"..."}`, returns modified message plus version info (payloads over 1 MiB are rejected).
 - **GET /info:** Returns environment, version, commit hash, and more.
 - **GET /version:** Lightweight health/version probe that returns only the service name, version, and commit hash.
  - **GET /internal/config:** Internal-only helper that reports whether `FAKE_SECRET` is present (and its length), without exposing the value.
@@ -162,7 +162,7 @@ Control runtime behavior via:
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
   - When using file‑based reloads, this is set dynamically by `/-/reload` and does not need to be provided at process start.
-- `VERSION` (e.g., v0.3.31)
+- `VERSION` (e.g., v0.3.32)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
@@ -178,7 +178,7 @@ Valid values include `debug`, `info`, `warn`, and `error`.
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.31
+export VERSION=v0.3.32
 export GIT_COMMIT=abc1234
 export PORT=9090
 

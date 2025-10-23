@@ -7,10 +7,13 @@ package handlers
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"github.com/rs/zerolog/log"
 )
+
+const maxEchoBodyBytes = 1 << 20 // 1 MiB
 
 type EchoRequest struct {
 	Message string `json:"message"`
@@ -30,9 +33,16 @@ func EchoHandler(w http.ResponseWriter, r *http.Request) {
 	log.Debug().Msg("Handling /echo request")
 
 	var req EchoRequest
+	r.Body = http.MaxBytesReader(w, r.Body, maxEchoBodyBytes)
 	decoder := json.NewDecoder(r.Body)
 	decoder.DisallowUnknownFields()
 	if err := decoder.Decode(&req); err != nil {
+		var maxBytesErr *http.MaxBytesError
+		if errors.As(err, &maxBytesErr) {
+			log.Warn().Msg("Rejected /echo request: payload too large")
+			writeJSONError(w, http.StatusRequestEntityTooLarge, "Payload too large (max 1MiB)")
+			return
+		}
 		log.Error().Err(err).Msg("Failed to decode /echo request body")
 		writeJSONError(w, http.StatusBadRequest, "Invalid input")
 		return
