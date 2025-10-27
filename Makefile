@@ -16,7 +16,7 @@ help:
 
 deps:
 	@echo "Downloading Go module dependencies..."
-	go mod tidy
+	go mod download
 
 build: deps
 	@echo "Building toy-service..."

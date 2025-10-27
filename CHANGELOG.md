@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.33 - 2025-10-27
+
+### chore: avoid rewriting modules during deps
+
+- Switch `make deps` to use `go mod download` so dependency installs leave `go.mod` untouched unless needed.
+- Refresh default metadata references to `v0.3.33`.
+
 ## v0.3.32 - 2025-10-23
 
 ### fix: cap echo payload size
