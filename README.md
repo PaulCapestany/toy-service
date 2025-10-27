@@ -68,6 +68,7 @@ toy-service/
 ```bash
 make help
 make deps      # download Go modules before building
+make tidy      # reconcile go.mod/go.sum after dependency changes
 make build
 make fmt       # format Go source files
 make lint      # run go vet static checks
@@ -162,7 +163,7 @@ Control runtime behavior via:
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
   - When using file‑based reloads, this is set dynamically by `/-/reload` and does not need to be provided at process start.
-- `VERSION` (e.g., v0.3.33)
+- `VERSION` (e.g., v0.3.34)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
@@ -178,7 +179,7 @@ Valid values include `debug`, `info`, `warn`, and `error`.
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.33
+export VERSION=v0.3.34
 export GIT_COMMIT=abc1234
 export PORT=9090
 

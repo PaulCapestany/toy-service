@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.34 - 2025-10-27
+
+### chore: add tidy helper for module maintenance
+
+- Introduce a `make tidy` target so contributors can reconcile `go.mod`/`go.sum` without running downloads.
+- Document the new helper in the README and refresh default metadata to `v0.3.34`.
+
 ## v0.3.33 - 2025-10-27
 
 ### chore: avoid rewriting modules during deps

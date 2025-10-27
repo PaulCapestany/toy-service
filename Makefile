@@ -1,8 +1,9 @@
-.PHONY: help deps build fmt lint test run clean coverage coverage-html docker-build docker-run
+.PHONY: help deps tidy build fmt lint test run clean coverage coverage-html docker-build docker-run
 
 help:
 	@echo "Available targets:"
 	@printf "  %-15s %s\n" "deps" "Download Go module dependencies"
+	@printf "  %-15s %s\n" "tidy" "Reconcile go.mod and go.sum"
 	@printf "  %-15s %s\n" "build" "Compile the toy-service binary"
 	@printf "  %-15s %s\n" "fmt" "Format all Go source files with gofmt"
 	@printf "  %-15s %s\n" "lint" "Run go vet for static analysis"
@@ -17,6 +18,10 @@ help:
 deps:
 	@echo "Downloading Go module dependencies..."
 	go mod download
+
+tidy:
+	@echo "Tidying Go module files..."
+	go mod tidy
 
 build: deps
 	@echo "Building toy-service..."
