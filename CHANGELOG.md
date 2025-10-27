@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.36 - 2025-10-27
+
+### fix: prevent caching of healthz responses
+
+- Add a `Cache-Control: no-store` header to `/healthz` so observability checks always get a fresh status.
+- Update tests, documentation, and metadata defaults to reference `v0.3.36`.
+
 ## v0.3.35 - 2025-10-27
 
 ### chore: remove completed contributing TODO

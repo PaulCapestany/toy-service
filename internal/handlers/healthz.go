@@ -22,6 +22,7 @@ func HealthzHandler(w http.ResponseWriter, r *http.Request) {
 	resp := map[string]string{"status": "ok"}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Cache-Control", "no-store")
 	if err := json.NewEncoder(w).Encode(resp); err != nil {
 		log.Error().Err(err).Msg("Failed to write /healthz response")
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)

@@ -33,7 +33,7 @@ func LoadEnvConfig() EnvConfig {
 		Env:          getEnv("SERVICE_ENV", "dev"),
 		LogVerbosity: getEnv("LOG_VERBOSITY", "info"),
 		FakeSecret:   getEnv("FAKE_SECRET", "redacted"),
-		Version:      getEnv("VERSION", "v0.3.35"),
+		Version:      getEnv("VERSION", "v0.3.36"),
 		GitCommit:    getEnv("GIT_COMMIT", "unknown"),
 		Name:         "toy-service",
 	}

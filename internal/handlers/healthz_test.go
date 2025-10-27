@@ -28,6 +28,7 @@ func TestHealthzHandler(t *testing.T) {
 	r.ServeHTTP(w, req)
 
 	require.Equal(t, http.StatusOK, w.Code)
+	require.Equal(t, "no-store", w.Header().Get("Cache-Control"))
 
 	var resp map[string]string
 	err = json.Unmarshal(w.Body.Bytes(), &resp)
