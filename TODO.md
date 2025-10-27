@@ -22,9 +22,6 @@ This document outlines planned enhancements and maintenance tasks for `toy-servi
 
 ### PATCH Improvements (Backward-Compatible Fixes, Docs, Chores)
 
-- **docs: add a CONTRIBUTING.md with detailed contribution guidelines**  
-  Create a `CONTRIBUTING.md` to clarify how to propose changes, run tests locally, follow code style guidelines, and name branches.
-
 - **docs: enhance inline code comments**  
   Improve `godoc` comments in `internal/handlers/*`, making the codebase more maintainable and developer-friendly.
 

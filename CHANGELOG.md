@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.35 - 2025-10-27
+
+### chore: remove completed contributing TODO
+
+- Drop the stale TODO about creating `CONTRIBUTING.md` now that the guide exists.
+- Refresh default metadata references to `v0.3.35`.
+
 ## v0.3.34 - 2025-10-27
 
 ### chore: add tidy helper for module maintenance
