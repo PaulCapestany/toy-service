@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.37 - 2025-10-30
+
+### fix: hide fake secret in info response
+
+- Stop returning the `FAKE_SECRET` value from `/info`; expose presence and length metadata instead.
+- Refresh default metadata references to `v0.3.37`.
+
 ## v0.3.36 - 2025-10-27
 
 ### fix: prevent caching of healthz responses

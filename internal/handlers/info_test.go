@@ -11,7 +11,7 @@ import (
 )
 
 func TestInfoHandler(t *testing.T) {
-	t.Log("Test that /info returns service metadata")
+	t.Log("Test that /info returns service metadata without exposing secrets")
 
 	r := chi.NewRouter()
 	r.Get("/info", InfoHandler)
@@ -23,14 +23,51 @@ func TestInfoHandler(t *testing.T) {
 	r.ServeHTTP(w, req)
 	require.Equal(t, http.StatusOK, w.Code)
 
-	var resp map[string]string
+	var resp struct {
+		Name              string `json:"name"`
+		Version           string `json:"version"`
+		Env               string `json:"env"`
+		LogVerbosity      string `json:"logVerbosity"`
+		FakeSecretPresent bool   `json:"fakeSecretPresent"`
+		FakeSecretLength  int    `json:"fakeSecretLength"`
+		Commit            string `json:"commit"`
+	}
 	err = json.Unmarshal(w.Body.Bytes(), &resp)
 	require.NoError(t, err)
 
-	require.Equal(t, "toy-service", resp["name"])
-	require.NotEmpty(t, resp["version"])
-	require.NotEmpty(t, resp["env"])
-	require.NotEmpty(t, resp["logVerbosity"])
-	require.NotEmpty(t, resp["fakeSecret"])
-	require.NotEmpty(t, resp["commit"])
+	require.Equal(t, "toy-service", resp.Name)
+	require.NotEmpty(t, resp.Version)
+	require.NotEmpty(t, resp.Env)
+	require.NotEmpty(t, resp.LogVerbosity)
+	require.False(t, resp.FakeSecretPresent)
+	require.Equal(t, 0, resp.FakeSecretLength)
+	require.NotEmpty(t, resp.Commit)
+}
+
+func TestInfoHandlerWithSecret(t *testing.T) {
+	t.Log("Test that /info reports secret presence without revealing value")
+
+	const secret = "super-secret"
+
+	r := chi.NewRouter()
+	r.Get("/info", InfoHandler)
+
+	t.Setenv("FAKE_SECRET", secret)
+
+	req, err := http.NewRequest("GET", "/info", nil)
+	require.NoError(t, err)
+
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+	require.Equal(t, http.StatusOK, w.Code)
+
+	var resp struct {
+		FakeSecretPresent bool `json:"fakeSecretPresent"`
+		FakeSecretLength  int  `json:"fakeSecretLength"`
+	}
+	err = json.Unmarshal(w.Body.Bytes(), &resp)
+	require.NoError(t, err)
+
+	require.True(t, resp.FakeSecretPresent)
+	require.Equal(t, len(secret), resp.FakeSecretLength)
 }

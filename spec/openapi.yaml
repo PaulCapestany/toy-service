@@ -103,7 +103,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.3.36"
+          example: "v0.3.37"
         commit:
           type: string
           description: Git commit hash or short SHA
@@ -128,7 +128,7 @@ components:
         version:
           type: string
           description: Current semantic version of the service
-          example: "v0.3.36"
+          example: "v0.3.37"
         env:
           type: string
           description: Current runtime environment
@@ -137,10 +137,15 @@ components:
           type: string
           description: Current log verbosity level
           example: "info"
-        fakeSecret:
-          type: string
-          description: A placeholder or redacted secret for demonstration
-          example: "redacted"
+        fakeSecretPresent:
+          type: boolean
+          description: Indicates whether the fake secret environment variable is set
+          example: true
+        fakeSecretLength:
+          type: integer
+          description: Length of the fake secret value when present
+          example: 12
+          minimum: 0
         commit:
           type: string
           description: Git commit hash
@@ -150,7 +155,7 @@ components:
         - version
         - env
         - logVerbosity
-        - fakeSecret
+        - fakeSecretPresent
         - commit
 
     VersionResponse:
@@ -163,7 +168,7 @@ components:
         version:
           type: string
           description: Semantic version string for the running build
-          example: "v0.3.36"
+          example: "v0.3.37"
         commit:
           type: string
           description: Git commit hash or short SHA for the running build

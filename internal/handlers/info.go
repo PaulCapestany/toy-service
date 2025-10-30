@@ -8,6 +8,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"os"
 
 	"github.com/rs/zerolog/log"
 )
@@ -19,13 +20,28 @@ func InfoHandler(w http.ResponseWriter, r *http.Request) {
 
 	cfg := LoadEnvConfig()
 
-	resp := map[string]string{
-		"name":         cfg.Name,
-		"version":      cfg.Version,
-		"env":          cfg.Env,
-		"logVerbosity": cfg.LogVerbosity,
-		"fakeSecret":   cfg.FakeSecret,
-		"commit":       cfg.GitCommit,
+	secretVal, secretSet := os.LookupEnv("FAKE_SECRET")
+	fakeSecretPresent := secretSet && secretVal != ""
+
+	resp := struct {
+		Name              string `json:"name"`
+		Version           string `json:"version"`
+		Env               string `json:"env"`
+		LogVerbosity      string `json:"logVerbosity"`
+		FakeSecretPresent bool   `json:"fakeSecretPresent"`
+		FakeSecretLength  int    `json:"fakeSecretLength,omitempty"`
+		Commit            string `json:"commit"`
+	}{
+		Name:              cfg.Name,
+		Version:           cfg.Version,
+		Env:               cfg.Env,
+		LogVerbosity:      cfg.LogVerbosity,
+		FakeSecretPresent: fakeSecretPresent,
+		Commit:            cfg.GitCommit,
+	}
+
+	if fakeSecretPresent {
+		resp.FakeSecretLength = len(secretVal)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
