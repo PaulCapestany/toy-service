@@ -25,6 +25,7 @@ func VersionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Cache-Control", "no-store")
 	if err := json.NewEncoder(w).Encode(resp); err != nil {
 		log.Error().Err(err).Msg("Failed to write /version response")
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -33,4 +34,3 @@ func VersionHandler(w http.ResponseWriter, r *http.Request) {
 
 	log.Debug().Msg("/version response successfully returned")
 }
-

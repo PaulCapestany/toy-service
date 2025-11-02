@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.38 - 2025-11-02
+
+### fix: prevent caching of version response
+
+- Add a `Cache-Control: no-store` header to `/version` so clients never serve stale build metadata.
+- Refresh default metadata references to `v0.3.38`.
+
 ## v0.3.37 - 2025-10-30
 
 ### fix: hide fake secret in info response
