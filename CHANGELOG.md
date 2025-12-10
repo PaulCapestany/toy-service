@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.39 - 2025-12-10
+
+### fix: prevent caching of info response
+
+- Add a `Cache-Control: no-store` header to `/info` so metadata responses are never served stale.
+- Refresh default metadata references to `v0.3.39`.
+
 ## v0.3.38 - 2025-11-02
 
 ### fix: prevent caching of version response

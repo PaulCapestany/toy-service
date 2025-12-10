@@ -22,6 +22,7 @@ func TestInfoHandler(t *testing.T) {
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 	require.Equal(t, http.StatusOK, w.Code)
+	require.Equal(t, "no-store", w.Header().Get("Cache-Control"))
 
 	var resp struct {
 		Name              string `json:"name"`
