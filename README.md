@@ -100,8 +100,8 @@ By default, the service runs at http://localhost:8080.
 - **POST /echo:** Accepts a JSON `{"message":"..."}`, returns modified message plus version info (payloads over 1 MiB are rejected).
 - **GET /info:** Returns environment, version, commit hash, and more.
 - **GET /version:** Lightweight health/version probe that returns only the service name, version, and commit hash.
- - **GET /internal/config:** Internal-only helper that reports whether `FAKE_SECRET` is present (and its length), without exposing the value.
- - **POST /-/reload:** Reloads secrets from a mounted directory into process env (see Live Secret Reload).
+- **GET /internal/config:** Internal-only helper that reports whether `FAKE_SECRET` is present (and its length), without exposing the value.
+- **POST /-/reload:** Reloads secrets from a mounted directory into process env (see Live Secret Reload).
 
 #### Quick API Checks
 
@@ -163,7 +163,7 @@ Control runtime behavior via:
 - `LOG_VERBOSITY` (e.g., info, debug)
 - `FAKE_SECRET` (e.g., topsecret, redacted)
   - When using file‑based reloads, this is set dynamically by `/-/reload` and does not need to be provided at process start.
-- `VERSION` (e.g., v0.3.39)
+- `VERSION` (e.g., v0.3.40)
 - `PORT` (e.g., 8080)
 - `GIT_COMMIT` (e.g., abc1234)
 
@@ -179,7 +179,7 @@ Valid values include `debug`, `info`, `warn`, and `error`.
 export SERVICE_ENV=prod
 export LOG_VERBOSITY=debug
 export FAKE_SECRET=topsecret
-export VERSION=v0.3.39
+export VERSION=v0.3.40
 export GIT_COMMIT=abc1234
 export PORT=9090
 

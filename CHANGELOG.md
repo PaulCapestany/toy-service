@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.40 - 2025-12-23
+
+### docs: tidy endpoint list formatting
+
+- Align the README endpoint list indentation so the bullets render consistently.
+- Refresh OpenAPI and default metadata references to `v0.3.40`.
+
 ## v0.3.39 - 2025-12-10
 
 ### fix: prevent caching of info response
