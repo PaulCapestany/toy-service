@@ -35,6 +35,8 @@ This repository intentionally excludes Kubernetes manifests. Runtime deployment 
 
 When issues or pull requests here depend on deployment changes, include links to the relevant GitOps chart or values files so reviewers can follow the rollout. Keeping manifests in the GitOps repo ensures Argo CD remains the single source of truth—please do not add cluster YAML directly to `toy-service`.
 
+CI sanity check: this doc-only change exercises the Tekton -> Quay -> Image Updater flow; no runtime behavior changes.
+
 ## Project Structure
 
 ```text
